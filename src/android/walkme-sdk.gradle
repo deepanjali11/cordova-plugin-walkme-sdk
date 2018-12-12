@@ -1,0 +1,6 @@
+implementation ('abbi.io:abbisdk:+') {
+      exclude module: 'support-v4'
+      exclude module: 'appcompat-v7'
+      exclude module: 'design'
+      exclude module: 'recyclerview-v7'
+}

@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-walkme",
+  "name": "WalkMeSDK",
   "version": "1.0.0",
   "description": "Cordova plugin for WalkMeSDK native library",
   "cordova": {

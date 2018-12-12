@@ -1,2 +1,27 @@
-<?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-walkme" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"><name>cordova-plugin-walkme</name><js-module name="cordova-plugin-walkme" src="www/cordova-plugin-walkme.js"><clobbers target="cordova.plugins.cordova-plugin-walkme" /></js-module><platform name="ios"><config-file parent="/*" target="config.xml"><feature name="cordova-plugin-walkme"><param name="ios-package" value="cordova-plugin-walkme" /></feature></config-file><source-file src="src/ios/cordova-plugin-walkme.m" /></platform><platform name="android"><config-file parent="/*" target="res/xml/config.xml"><feature name="cordova-plugin-walkme"><param name="android-package" value="cordova-plugin-walkme.cordova-plugin-walkme" /></feature></config-file><config-file parent="/*" target="AndroidManifest.xml"></config-file><source-file src="src/android/cordova-plugin-walkme.java" target-dir="src/cordova-plugin-walkme/cordova-plugin-walkme" /></platform></plugin>
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="cordova-plugin-walkme" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <name>WalkMeSDK</name>
+  <js-module name="WalkMeSDK" src="www/WalkMeSDK.js">
+    <clobbers target="cordova.plugins.WalkMeSDK" />
+  </js-module>
+  <platform name="ios">
+    <framework src="abbi" type="podspec" spec="~> 1.13.3" />
+    <config-file parent="/*" target="config.xml">
+      <feature name="WalkMeSDK">
+        <param name="ios-package" value="WalkMeSDK" />
+      </feature>
+    </config-file>
+    <source-file src="src/ios/WalkMeSDK.m" />
+  </platform>
+  <platform name="android">
+    <framework custom="true" src="src/android/walkme-sdk.gradle" type="gradleReference" />
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="WalkMeSDK">
+        <param name="android-package" value="cordova-plugin-walkme.WalkMeSDK" />
+      </feature>
+    </config-file>
+    <config-file parent="/*" target="AndroidManifest.xml">
+    </config-file>
+    <source-file src="src/android/WalkMeSDK.java" target-dir="src/cordova-plugin-walkme/WalkMeSDK" />
+  </platform>
+</plugin>
