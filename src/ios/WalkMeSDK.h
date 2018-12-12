@@ -21,6 +21,16 @@
  - (void)restart:(CDVInvokedUrlCommand *)command;
 
  /**
+  * Starts ABBI SDK - FOR HYBRID APPS ONLY!
+  *
+  * @param appId The Application Id provided by ABBI
+  * @param appSecretKey The Application Secret key provided by ABBI
+  * @param type The Application Type (i.e. ABBI_APP_HYBRID)
+  *
+  */
+- (void)startWithApplicationType:(CDVInvokedUrlCommand *)command;
+
+ /**
   * Sends a Goal to ABBI's Backend.
   * A Goal is a user action that can be used to target your users.
   *
