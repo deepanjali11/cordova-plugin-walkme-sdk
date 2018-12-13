@@ -1,4 +1,4 @@
-package cordova-plugin-walkme;
+package cordova-plugin-walkme-sdk;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;

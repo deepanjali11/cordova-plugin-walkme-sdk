@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="cordova-plugin-walkme" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-walkme-sdk" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>WalkMeSDK</name>
   <js-module name="WalkMeSDK" src="www/WalkMeSDK.js">
     <clobbers target="cordova.plugins.WalkMeSDK" />
@@ -17,11 +17,11 @@
     <framework custom="true" src="src/android/walkme-sdk.gradle" type="gradleReference" />
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="WalkMeSDK">
-        <param name="android-package" value="cordova-plugin-walkme.WalkMeSDK" />
+        <param name="android-package" value="cordova-plugin-walkme-sdk.WalkMeSDK" />
       </feature>
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml">
     </config-file>
-    <source-file src="src/android/WalkMeSDK.java" target-dir="src/cordova-plugin-walkme/WalkMeSDK" />
+    <source-file src="src/android/WalkMeSDK.java" target-dir="src/cordova-plugin-walkme-sdk/WalkMeSDK" />
   </platform>
 </plugin>
