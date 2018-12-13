@@ -11,6 +11,7 @@
         <param name="ios-package" value="WalkMeSDK" />
       </feature>
     </config-file>
+    <source-file src="src/ios/WalkMeSDK.h" />
     <source-file src="src/ios/WalkMeSDK.m" />
   </platform>
   <platform name="android">

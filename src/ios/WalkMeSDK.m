@@ -85,7 +85,7 @@
         NSString *key = [command.arguments objectAtIndex:0];
         id value = [command.arguments objectAtIndex:1];
 
-        [ABBI setUserAttributeWithKey:key andValue:value]
+        [ABBI setUserAttributeWithKey:key andValue:value];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
@@ -102,7 +102,7 @@
     else {
         NSDictionary *attributes = [command.arguments objectAtIndex:0];
 
-        [ABBI setUserAttributes:attributes]
+        [ABBI setUserAttributes:attributes];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
@@ -120,7 +120,7 @@
         NSString *key = [command.arguments objectAtIndex:0];
         id value = [command.arguments objectAtIndex:1];
 
-        [ABBI setPrivateUserAttributeWithKey:key andValue:value]
+        [ABBI setPrivateUserAttributeWithKey:key andValue:value];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
@@ -137,7 +137,7 @@
     else {
         NSDictionary *attributes = [command.arguments objectAtIndex:0];
 
-        [ABBI setPrivateUserAttributes:attributes]
+        [ABBI setPrivateUserAttributes:attributes];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
@@ -150,13 +150,16 @@
 }
 
 - (void)setFlag:(CDVInvokedUrlCommand *)command {
+    CDVPluginResult* pluginResult = nil;
+    NSInteger argCount = command.arguments.count;
+
     if (argCount < 1) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }
     else {
         NSNumber *num = [command.arguments objectAtIndex:0];
 
-        [ABBI setFlag:num.intValue]
+        [ABBI setFlag:num.intValue];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
@@ -178,7 +181,7 @@
         }
         else if (argCount == 2) {
             NSString *deepLink = [command.arguments objectAtIndex:1];
-            [ABBI trigger:goalName withDeepLink:deepLink];
+            [ABBI trigger:trigger withDeepLink:deepLink];
         }
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -188,13 +191,16 @@
 }
 
 - (void)setUserID:(CDVInvokedUrlCommand *)command {
+    CDVPluginResult* pluginResult = nil;
+    NSInteger argCount = command.arguments.count;
+
     if (argCount < 1) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }
     else {
         NSNumber *userId = [command.arguments objectAtIndex:0];
 
-        [ABBI setUserID:userId]
+        [ABBI setUserID:userId];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
@@ -212,11 +218,11 @@
         NSString *url = [command.arguments objectAtIndex:0];
 
         if (argCount == 1) {
-            [ABBI openURL:url options:nil];
+            // [ABBI openURL:url options:nil];
         }
         else if (argCount == 2) {
             NSDictionary *options = [command.arguments objectAtIndex:1];
-            [ABBI openURL:url options:options];
+            // [ABBI openURL:url options:options];
         }
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
