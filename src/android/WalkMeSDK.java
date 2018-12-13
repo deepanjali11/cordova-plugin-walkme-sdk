@@ -1,4 +1,6 @@
-package cordova-plugin-walkme-sdk;
+package cordova.plugin.walkme.sdk;
+
+import android.app.Application;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -6,6 +8,14 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import abbi.io.abbisdk.ABBI;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -17,44 +27,34 @@ public class WalkMeSDK extends CordovaPlugin {
         if (action.equals("start")) {
             this.start(args, callbackContext);
             return true;
-        }
-        else if (action.equals("restart")) {
+        } else if (action.equals("restart")) {
             this.restart(callbackContext);
             return true;
-        }
-        else if (action.equals("sendGoal")) {
+        } else if (action.equals("sendGoal")) {
             this.sendGoal(args, callbackContext);
             return true;
-        }
-        else if (action.equals("setUserAttribute")) {
+        } else if (action.equals("setUserAttribute")) {
             this.setUserAttribute(args, callbackContext);
             return true;
-        }
-        else if (action.equals("setUserAttributes")) {
+        } else if (action.equals("setUserAttributes")) {
             this.setUserAttributes(args, callbackContext);
             return true;
-        }
-        else if (action.equals("setPrivateUserAttribute")) {
+        } else if (action.equals("setPrivateUserAttribute")) {
             this.setPrivateUserAttribute(args, callbackContext);
             return true;
-        }
-        else if (action.equals("setPrivateUserAttributes")) {
+        } else if (action.equals("setPrivateUserAttributes")) {
             this.setPrivateUserAttributes(args, callbackContext);
             return true;
-        }
-        else if (action.equals("clearPrivateUserAttributes")) {
+        } else if (action.equals("clearPrivateUserAttributes")) {
             this.clearPrivateUserAttributes(callbackContext);
             return true;
-        }
-        else if (action.equals("setFlag")) {
+        } else if (action.equals("setFlag")) {
             this.setFlag(args, callbackContext);
             return true;
-        }
-        else if (action.equals("trigger")) {
+        } else if (action.equals("trigger")) {
             this.trigger(args, callbackContext);
             return true;
-        }
-        else if (action.equals("setUserID")) {
+        } else if (action.equals("setUserID")) {
             this.setUserID(args, callbackContext);
             return true;
         }
@@ -63,7 +63,7 @@ public class WalkMeSDK extends CordovaPlugin {
     }
 
     private void start(JSONArray args, CallbackContext callbackContext) {
-        if (args.length < 2) {
+        if (args.length() < 2) {
             callbackContext.error("missing params.");
             return;
         }
@@ -72,9 +72,9 @@ public class WalkMeSDK extends CordovaPlugin {
         String secret = args.optString(0);
 
         if (key != null && secret != null) {
-            Context context = this.cordova.getActivity().getApplicationContext();
-            ABBI.start(key, secret,  context);
-            callbackContext.success(null);
+            Application application = this.cordova.getActivity().getApplication();
+            ABBI.start(key, secret, application);
+            callbackContext.success();
         } else {
             callbackContext.error("missing params.");
         }
@@ -82,180 +82,167 @@ public class WalkMeSDK extends CordovaPlugin {
 
     private void restart(CallbackContext callbackContext) {
         ABBI.restart();
-        callbackContext.success(null);
+        callbackContext.success();
     }
 
     private void sendGoal(JSONArray args, CallbackContext callbackContext) {
-        if (args.length == 0) {
+        if (args.length() == 0) {
             callbackContext.error("missing params.");
             return;
         }
 
         String goalName = args.optString(0);
-        if (args.length == 1) {
-            ABBI.sendGoal(goalName);
-            callbackContext.success(null);
+        JSONObject object = args.optJSONObject(1);
+        Map<String, Object> properties = null;
+        if (object != null) {
+            properties = toMap(object);
         }
-        else if (args.length == 2) {
-            JSONObject object = args.optJSONObject(1);
-            Map properties = toMap(object);
-            ABBI.sendGoal(goalName, properties);
-            callbackContext.success(null);
-        }
+
+        ABBI.sendGoal(goalName, properties);
+        callbackContext.success();
     }
 
     private void setUserAttribute(JSONArray args, CallbackContext callbackContext) {
-        if (args.length < 2) {
+        if (args.length() < 2) {
             callbackContext.error("missing params.");
             return;
         }
 
         String key = args.optString(0);
-        Object value = args.optObject(1);
+        Object value = args.opt(1);
 
         if (key != null && value != null) {
             ABBI.setUserAttribute(key, value);
-            callbackContext.success(null);
+            callbackContext.success();
         } else {
             callbackContext.error("missing params.");
         }
     }
 
     private void setUserAttributes(JSONArray args, CallbackContext callbackContext) {
-        if (args.length < 1) {
+        if (args.length() < 1) {
             callbackContext.error("missing params.");
             return;
         }
 
         JSONObject object = args.optJSONObject(0);
-        Map attributes = toMap(object);
+        Map<String, Object> attributes = toMap(object);
 
-        if (key != null && value != null) {
-            ABBI.setUserAttributes(attributes);
-            callbackContext.success(null);
-        } else {
-            callbackContext.error("missing params.");
-        }
+        ABBI.setUserAttributes(attributes);
+        callbackContext.success();
     }
 
     private void setPrivateUserAttribute(JSONArray args, CallbackContext callbackContext) {
-        if (args.length < 2) {
+        if (args.length() < 2) {
             callbackContext.error("missing params.");
             return;
         }
 
         String key = args.optString(0);
-        Object value = args.optObject(1);
+        Object value = args.opt(1);
 
         if (key != null && value != null) {
             ABBI.setPrivateUserAttribute(key, value);
-            callbackContext.success(null);
+            callbackContext.success();
         } else {
             callbackContext.error("missing params.");
         }
     }
 
     private void setPrivateUserAttributes(JSONArray args, CallbackContext callbackContext) {
-        if (args.length < 1) {
+        if (args.length() < 1) {
             callbackContext.error("missing params.");
             return;
         }
 
         JSONObject object = args.optJSONObject(0);
-        Map attributes = toMap(object);
+        Map<String, Object> attributes = toMap(object);
 
-        if (key != null && value != null) {
-            ABBI.setPrivateUserAttributes(attributes);
-            callbackContext.success(null);
-        } else {
-            callbackContext.error("missing params.");
-        }
+        ABBI.setPrivateUserAttributes(attributes);
+        callbackContext.success();
     }
 
     private void clearPrivateUserAttributes(CallbackContext callbackContext) {
         ABBI.clearPrivateUserAttributes();
-        callbackContext.success(null);
+        callbackContext.success();
     }
 
     private void setFlag(JSONArray args, CallbackContext callbackContext) {
-        if (args.length < 1) {
+        if (args.length() < 1) {
             callbackContext.error("missing params.");
             return;
         }
 
         int flag = args.optInt(0);
         ABBI.setFlag(flag);
-        callbackContext.success(null);
+        callbackContext.success();
     }
 
     private void trigger(JSONArray args, CallbackContext callbackContext) {
-        if (args.length == 0) {
+        if (args.length() == 0) {
             callbackContext.error("missing params.");
             return;
         }
 
         String trigger = args.optString(0);
-        if (args.length == 1) {
-            ABBI.trigger(trigger);
-            callbackContext.success(null);
-        }
-        else if (args.length == 2) {
-            String deepLink = args.optString(0);
-            ABBI.trigger(trigger, deepLink);
-            callbackContext.success(null);
-        }
+        String deepLink = args.optString(1);
+
+        ABBI.trigger(trigger, deepLink);
+        callbackContext.success();
     }
 
-    private void setUserID(CallbackContext callbackContext) {
-        if (args.length < 1) {
+    private void setUserID(JSONArray args, CallbackContext callbackContext) {
+        if (args.length() < 1) {
             callbackContext.error("missing params.");
             return;
         }
 
         String userId = args.optString(0);
-        ABBI.setUserID(userId);
-        callbackContext.success(null);
+        ABBI.setUserId(userId);
+        callbackContext.success();
     }
 
     // Helpers
     private Map<String, Object> toMap(JSONObject object) {
-      Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
 
-      try {
-        Iterator<String> keysItr = object.keys();
-        while (keysItr.hasNext()) {
-            String key = keysItr.next();
-            Object value = object.get(key);
+        try {
+            Iterator<String> keysItr = object.keys();
+            while (keysItr.hasNext()) {
+                String key = keysItr.next();
+                Object value = object.get(key);
 
-            if (value instanceof JSONArray) {
-                value = toList((JSONArray) value);
+                if (value instanceof JSONArray) {
+                    value = toList((JSONArray) value);
+                } else if (value instanceof JSONObject) {
+                    value = toMap((JSONObject) value);
+                }
+                map.put(key, value);
             }
-            else if (value instanceof JSONObject) {
-                value = toMap((JSONObject) value);
-            }
-            map.put(key, value);
+        } catch (Exception ignored) {
+            return null;
         }
-      } catch (Exception e) {}
 
-      return map;
+        return map;
     }
 
     private List<Object> toList(JSONArray array) {
-      List<Object> list = new ArrayList<Object>();
+        List<Object> list = new ArrayList<>();
         try {
-          for (int i = 0; i < array.length(); i++) {
-              Object value = array.get(i);
-              if (value instanceof JSONArray) {
-                  value = toList((JSONArray) value);
-              }
-              else if (value instanceof JSONObject) {
-                  value = toMap((JSONObject) value);
-              }
+            for (int i = 0; i < array.length(); i++) {
+                Object value = array.get(i);
+                if (value instanceof JSONArray) {
+                    value = toList((JSONArray) value);
+                } else if (value instanceof JSONObject) {
+                    value = toMap((JSONObject) value);
+                }
 
-              list.add(value);
-          }
-        } catch (Exception e) {}
+                list.add(value);
+            }
+        } catch (Exception ignored) {
+            return null;
+        }
 
-    return list;
-}
+        return list;
+    }
 }

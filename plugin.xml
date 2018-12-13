@@ -18,7 +18,7 @@
     <framework custom="true" src="src/android/walkme-sdk.gradle" type="gradleReference" />
     <config-file parent="/*" target="res/xml/config.xml">
       <feature name="WalkMeSDK">
-        <param name="android-package" value="cordova-plugin-walkme-sdk.WalkMeSDK" />
+        <param name="android-package" value="cordova.plugin.walkme.sdk.WalkMeSDK" />
       </feature>
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml">
