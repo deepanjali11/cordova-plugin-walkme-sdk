@@ -13,7 +13,7 @@
         NSString *secret = [command.arguments objectAtIndex:1];
 
         if (key && secret) {
-            [ABBI start:key withSecretKey:secret];
+            [ABBI start:key withSecretKey:secret andApplicationType:ABBI_APP_HYBRID];
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -198,7 +198,7 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
     }
     else {
-        NSNumber *userId = [command.arguments objectAtIndex:0];
+        NSString *userId = [command.arguments objectAtIndex:0];
 
         [ABBI setUserID:userId];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -207,7 +207,8 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (void)openURL:(CDVInvokedUrlCommand *)command {
+// will be released in next version (1.14.0)
+/*- (void)openURL:(CDVInvokedUrlCommand *)command {
     CDVPluginResult* pluginResult = nil;
     NSInteger argCount = command.arguments.count;
 
@@ -222,13 +223,13 @@
         }
         else if (argCount == 2) {
             NSDictionary *options = [command.arguments objectAtIndex:1];
-            // [ABBI openURL:url options:options];
+            [ABBI openURL:url options:options];
         }
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     }
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-}
+}*/
 
 @end

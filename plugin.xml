@@ -5,7 +5,7 @@
     <clobbers target="cordova.plugins.WalkMeSDK" />
   </js-module>
   <platform name="ios">
-    <framework src="abbi" type="podspec" spec="~> 1.13.3" />
+    <framework src="abbi" type="podspec" spec="" />
     <config-file parent="/*" target="config.xml">
       <feature name="WalkMeSDK">
         <param name="ios-package" value="WalkMeSDK" />
