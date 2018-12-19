@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import abbi.io.abbisdk.ABBI;
+import abbi.io.abbisdk.ABBIFlags;
 
 /**
  * This class echoes a string called from JavaScript.
