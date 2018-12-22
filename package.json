@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-walkme-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Cordova plugin for WalkMeSDK native library",
   "cordova": {
     "id": "cordova-plugin-walkme-sdk",
@@ -11,17 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abbiio/cordova-plugin-walkme.git"
+    "url": "git+https://github.com/abbiio/cordova-plugin-walkme-sdk.git"
   },
   "keywords": [
     "ecosystem:cordova",
     "cordova-ios",
-    "cordova-android"
+    "cordova-android",
+    "walkme",
+    "walkmesdk",
+    "walkme-sdk"
   ],
-  "author": "WalkMe Inc.",
-  "license": "ISC",
+  "author": "WalkMe Ltd.",
+  "license": "Commercial Software",
   "bugs": {
-    "url": "https://github.com/abbiio/cordova-plugin-walkme/issues"
+    "url": "https://github.com/abbiio/cordova-plugin-walkme-sdk/issues"
   },
-  "homepage": "https://github.com/abbiio/cordova-plugin-walkme#readme"
+  "homepage": "https://github.com/abbiio/cordova-plugin-walkme-sdk#readme"
 }
