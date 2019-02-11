@@ -28,28 +28,6 @@
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
-- (void)startWithApplicationType:(CDVInvokedUrlCommand *)command {
-    CDVPluginResult* pluginResult = nil;
-
-    if (command.arguments.count < 3) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
-    else {
-        NSString *key = [command.arguments objectAtIndex:0];
-        NSString *secret = [command.arguments objectAtIndex:1];
-        NSNumber *apptype = [command.arguments objectAtIndex:3];
-
-        if (key && secret) {
-            [ABBI start:key withSecretKey:secret];
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-        } else {
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-        }
-    }
-
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-}
-
 - (void)sendGoal:(CDVInvokedUrlCommand *)command {
     CDVPluginResult* pluginResult = nil;
     NSInteger argCount = command.arguments.count;
@@ -206,30 +184,5 @@
 
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
-
-// will be released in next version (1.14.0)
-/*- (void)openURL:(CDVInvokedUrlCommand *)command {
-    CDVPluginResult* pluginResult = nil;
-    NSInteger argCount = command.arguments.count;
-
-    if (argCount == 0) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-    }
-    else {
-        NSString *url = [command.arguments objectAtIndex:0];
-
-        if (argCount == 1) {
-            // [ABBI openURL:url options:nil];
-        }
-        else if (argCount == 2) {
-            NSDictionary *options = [command.arguments objectAtIndex:1];
-            [ABBI openURL:url options:options];
-        }
-
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    }
-
-    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-}*/
 
 @end

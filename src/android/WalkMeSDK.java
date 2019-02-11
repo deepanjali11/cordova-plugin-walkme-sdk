@@ -70,7 +70,7 @@ public class WalkMeSDK extends CordovaPlugin {
         }
 
         String key = args.optString(0);
-        String secret = args.optString(0);
+        String secret = args.optString(1);
 
         if (key != null && secret != null) {
             ABBI.setFlag(ABBIFlags.ABBI_APP_HYBRID.getValue());
