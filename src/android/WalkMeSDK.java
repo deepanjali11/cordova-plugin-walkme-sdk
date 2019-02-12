@@ -74,8 +74,8 @@ public class WalkMeSDK extends CordovaPlugin {
 
         if (key != null && secret != null) {
             ABBI.setFlag(ABBIFlags.ABBI_APP_HYBRID.getValue());
-            Application application = this.cordova.getActivity().getApplication();
-            ABBI.start(key, secret, application);
+            Activity activity = this.cordova.getActivity();
+            ABBI.start(key, secret, activity);
             callbackContext.success();
         } else {
             callbackContext.error("missing params.");
