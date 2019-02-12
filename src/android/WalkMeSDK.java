@@ -1,6 +1,7 @@
 package cordova.plugin.walkme.sdk;
 
 import android.app.Application;
+import android.app.Activity;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;

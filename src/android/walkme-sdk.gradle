@@ -1,5 +1,5 @@
 dependencies {
-    implementation ('abbi.io:abbisdk:+') {
+    implementation ('abbi.io:abbisdk:1.14.1') {
           exclude module: 'support-v4'
           exclude module: 'appcompat-v7'
           exclude module: 'design'
